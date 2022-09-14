@@ -1,0 +1,12 @@
+.number{
+    display: flex;
+    justify-content: center;
+    border: 1px solid gray;
+    height: 100px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.viewport{
+    height: 400px;
+}

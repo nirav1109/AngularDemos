@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row m-5">
+        <h2>Simple Chips</h2>
+        <div class="col-md-12">
+            <mat-chip-list>
+                <mat-chip>
+                    Chip 1
+                </mat-chip>
+                <mat-chip>
+                    Chip 2
+                </mat-chip>
+                <mat-chip>
+                    Chip 3
+                </mat-chip>
+                <mat-chip>
+                    Chip 4
+                </mat-chip>
+                <mat-chip>
+                    Chip 5
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="col-md-12">
+            <h2>Chips with color Attributes</h2>
+            <mat-chip-list>
+                <mat-chip color="primary" selected>
+                    Chip 1
+                </mat-chip>
+                <mat-chip color="accent" selected>
+                    Chip 2
+                </mat-chip>
+                <mat-chip color="warn" selected>
+                    Chip 3
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="col-md-12">
+            <h2>Chips with remove Attributes</h2>
+            <mat-chip-list>
+                <mat-chip color="primary" selected (removed)="remove()">
+                    Chip 1
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="col-md-12">
+            <h2>Chips with avtar Attributes</h2>
+            <mat-chip-list>
+                <mat-chip>
+                    <img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="avtar" />
+                    With avtar
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div class="row m-5">
+        <h2>Chip with Form Control</h2>
+        <div class="example-button-container">
+            <button mat-raised-button (click)="formControl.disable()">Disable form control</button>
+            <button mat-raised-button (click)="formControl.enable()">Enable form control</button>
+          </div>
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-chip-list #chipList aria-label="Video keywords" multiple [formControl]="formControl">
+              <mat-chip
+                  *ngFor="let keyword of keywords"
+                  [selected]="keyword"
+                  [value]="keyword"
+                  (removed)="removeKeyword(keyword)">
+                {{keyword}}
+              </mat-chip>
+              <input
+                placeholder="Add New Tech..."
+                [matChipInputFor]="chipList"
+                (matChipInputTokenEnd)="addKeywordFromInput($event)">
+            </mat-chip-list>
+          </mat-form-field>
+    </div>
+</div>

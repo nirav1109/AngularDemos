@@ -1,0 +1,31 @@
+<div class="container m-5">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Progress Spinner with 80%</h2>
+            <mat-progress-spinner value="80"></mat-progress-spinner>
+        </div>
+        <div class="col-md-3">
+            <h2>Mat Spinner with infinite loop</h2>
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="col-md-3">
+            <h2>Mat Spinner with Condition base</h2>
+            <button class="btn btn-primary" (click)="loadData()">Load data</button>
+            <mat-spinner *ngIf="showSpinner" class="mt-5"></mat-spinner>
+        </div>
+        <div class="col-md-3">
+            <h2>Mat Spinner Color</h2>
+            <mat-spinner color="warn"></mat-spinner>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mat Progress Bar buffer mode </h2>
+            <mat-progress-bar mode="buffer"></mat-progress-bar>
+            <hr>
+            <h2>Mat Progress Bar with 70% and determinate mode </h2>
+            <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container d-flex justify-content-center">
+  <form class="example-form pt-5" [formGroup]="userForm" (ngSubmit)="userForm.valid && formSubmit()">
+    <span class="d-flex justify-content-center">
+      <img  src="../../../assets/images/logo.png" height="100" width="100"/>
+    </span>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Ex. abc@gmail.com" formControlName="email" id="email" name="email"
+          type="email" />
+      <mat-error *ngIf="userForm.get('email').hasError('required')">Email is required</mat-error>
+  </mat-form-field>
+
+
+     <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" formControlName="password" name="password" type="password"
+                #passwordRef autocomplete="false" ngModel />
+            <button matSuffix mat-button class="btn btn-text" type="button"
+                (click)="passwordRef.type==='text'?passwordRef.type='password':passwordRef.type='text'" color="primary">
+                <span *ngIf="passwordRef.type==='password'">Show</span>
+                <span *ngIf="passwordRef.type==='text'" translate>Hide</span>
+            </button>
+            <mat-error *ngIf="userForm.get('password').hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+
+
+      <button type="submit" mat-button class="btn btn-primary">Log In</button>
+      Don't have account ? <a routerLink="/signup"> Signup</a>
+
+  </form>
+
+</div>

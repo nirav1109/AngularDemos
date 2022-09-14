@@ -1,0 +1,231 @@
+
+<div class="container">
+  <mat-horizontal-stepper labelPosition="bottom" linear>
+    <mat-step [stepControl]="userForm.get('firstName')">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>First Name</ng-template>
+        <mat-form-field
+          class="example-full-width col-md-3 pt-5"
+          appearance="fill"
+        >
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            placeholder="Ex. John"
+            formControlName="firstName"
+            id="firstName"
+            name="firstname"
+            type="text"
+          />
+          <mat-error *ngIf="userForm.get('firstName').hasError('required')"
+            >First Name is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('firstName').hasError('pattern')"
+            >Please enter valid First Name
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userForm.get('lastName')">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>Last Name</ng-template>
+
+        <mat-form-field
+          class="example-full-width col-md-3 pt-5"
+          appearance="fill"
+        >
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Michel"
+            formControlName="lastName"
+            id="lastName"
+            name="lastname"
+            type="text"
+          />
+          <mat-error *ngIf="userForm.get('lastName').hasError('required')"
+            >Last Name is required</mat-error
+          >
+          <mat-error *ngIf="userForm.get('lastName').hasError('pattern')"
+            >Please enter valid Last Name
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userForm.get('city')">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>City</ng-template>
+
+        <mat-form-field
+          class="example-full-width col-md-3 pt-5"
+          appearance="fill"
+        >
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Newyork"
+            formControlName="city"
+            id="city"
+            name="city"
+            type="text"
+          />
+          <mat-error *ngIf="userForm.get('city').hasError('pattern')"
+            >Please enter valid City
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userForm.get('hobbies')">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>Hobbies</ng-template>
+
+        <div formArrayName="hobbies">
+          <div class="row">
+            <div
+              *ngFor="
+                let hobby of userForm.get('hobbies').controls;
+                let i = index
+              "
+            >
+              <div class="col-md-10">
+                <mat-form-field
+                  class="example-full-width col-md-3 pt-2"
+                  appearance="fill"
+                >
+                  <input
+                    matInput
+                    placeholder="Ex. cricket , music, reading"
+                    type="text"
+                    [formControlName]="i"
+                  />
+                  <mat-error
+                    *ngIf="userForm.get('password').hasError('required')"
+                  >
+                    Hobby is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div
+                class="col-md-2"
+                *ngIf="userForm.get('hobbies').controls.length > 1"
+              >
+                <button
+                  type="button"
+                  mat-icon-button
+                  color="warn"
+                  (click)="deleteHobbies(i)"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-success mv-3"
+              (click)="addHobbies()"
+            >
+              Add More Hobbies
+            </button>
+          </div>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userForm.get('email') && userForm.get('password')">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>Email & Password</ng-template>
+        <mat-form-field
+          class="example-full-width col-md-3 pt-5"
+          appearance="fill"
+        >
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Ex. abc@gmail.com"
+            formControlName="email"
+            id="email"
+            name="email"
+            type="email"
+          />
+          <mat-error *ngIf="userForm.get('email').hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="userForm.get('email').hasError('email')"
+            >Please enter valid Email</mat-error
+          > </mat-form-field
+        ><br />
+        <mat-form-field
+          class="example-full-width col-md-3 pt-5"
+          appearance="fill"
+        >
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            name="password"
+            type="password"
+            #passwordRef
+            autocomplete="false"
+            ngModel
+          />
+          <button
+            matSuffix
+            mat-button
+            class="btn btn-text"
+            type="button"
+            (click)="
+              passwordRef.type === 'text'
+                ? (passwordRef.type = 'password')
+                : (passwordRef.type = 'text')
+            "
+            color="primary"
+          >
+            <span *ngIf="passwordRef.type === 'password'">Show</span>
+            <span *ngIf="passwordRef.type === 'text'" translate>Hide</span>
+          </button>
+          <mat-error *ngIf="userForm.get('password').hasError('pattern')">
+            Password must have 1 digit, 1 capital, 1 small and 1 special
+            character
+          </mat-error>
+          <mat-error *ngIf="userForm.get('password').hasError('required')"
+            >Password is required</mat-error
+          >
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="userForm">
+      <ng-template matStepLabel>Create an Account</ng-template>
+      <button mat-button matStepperPrevious>Back</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="formSubmit()"
+      >
+        Create an Account
+      </button>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
